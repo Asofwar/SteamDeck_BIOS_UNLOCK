@@ -1,6 +1,6 @@
 #include <sys/io.h>
 void main(){
-    ioperm(0x72,2,1);
+    ioperm(0x75,2,1);
     outb(0xF7,0x75);
     outb(0x77,0x76);
 }
