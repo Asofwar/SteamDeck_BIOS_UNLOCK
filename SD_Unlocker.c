@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/io.h>
+#include <errno.h>
 
 int main() {
     // Предоставляем разрешение на доступ к портам ввода/вывода
@@ -17,7 +18,16 @@ int main() {
 
     // Изменяем значения на портах
     outb(0xF7, 0x75);
+    if (errno) {
+        perror("Error writing to port 0x75");
+        exit(EXIT_FAILURE);
+    }
+
     outb(0x77, 0x76);
+    if (errno) {
+        perror("Error writing to port 0x76");
+        exit(EXIT_FAILURE);
+    }
 
     // Повторно считываем измененные значения
     unsigned char updated_value1 = inb(0x75);
